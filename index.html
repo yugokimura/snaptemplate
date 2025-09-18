@@ -1,1 +1,146 @@
 
+```html name=index.html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>レスポンシブ雛型</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+    }
+    header, main, footer {
+      max-width: 800px;
+      margin: auto;
+      padding: 1.5rem 1rem;
+    }
+    header {
+      background: #1976d2;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      min-height: 56px;
+    }
+    .menu-btn {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      z-index: 1002;
+    }
+    .menu-btn span {
+      display: block;
+      width: 28px;
+      height: 4px;
+      margin: 5px 0;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -220px;
+      width: 200px;
+      height: 100%;
+      background: #1976d2;
+      color: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+      padding-top: 60px;
+      transition: left 0.3s;
+      z-index: 1001;
+    }
+    .nav-menu.open {
+      left: 0;
+    }
+    .nav-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-menu li {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .menu-overlay.open {
+      display: block;
+    }
+    footer {
+      background: #eee;
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      header, main, footer {
+        padding: 1rem 0.5rem;
+      }
+      header {
+        font-size: 1.1em;
+      }
+      .nav-menu {
+        width: 70vw;
+        min-width: 140px;
+        max-width: 270px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <nav class="nav-menu" id="navMenu">
+    <ul>
+      <li>ホーム</li>
+      <li>サービス</li>
+      <li>会社情報</li>
+      <li>お問い合わせ</li>
+    </ul>
+  </nav>
+  <header>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h1>レスポンシブ雛型</h1>
+  </header>
+  <main>
+    <p>これは最小限のレスポンシブ対応HTML雛型です。画面サイズに応じてレイアウトが変化します。</p>
+  </main>
+  <footer>
+    &copy; 2025 Responsive Template
+  </footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    menuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('open');
+    });
+    menuOverlay.addEventListener('click', () => {
+      navMenu.classList.remove('open');
+      menuOverlay.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
+```
+左上のハンバーガーメニューをクリックすると、画面左からスライドしてメニューが表示されます。スマホにも対応しています。
