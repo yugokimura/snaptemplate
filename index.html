@@ -13,72 +13,124 @@
       color: #222;
     }
     header, main, footer {
-      max-width: 800px;
-      margin: auto;
+      margin: 0;
       padding: 1.5rem 1rem;
+      width: 100%;
+      box-sizing: border-box;
     }
     header {
       background: #1976d2;
       color: #fff;
       text-align: center;
       position: relative;
-      min-height: 56px;
+      min-height: 40px;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .menu-btn {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      padding: 0.5rem;
-      cursor: pointer;
-      z-index: 1002;
-    }
-    .menu-btn span {
-      display: block;
-      width: 28px;
-      height: 4px;
-      margin: 5px 0;
-      background: #fff;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      left: -220px;
-      width: 200px;
-      height: 100%;
-      background: #1976d2;
-      color: #fff;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.15);
-      padding-top: 60px;
-      transition: left 0.3s;
-      z-index: 1001;
-    }
-    .nav-menu.open {
-      left: 0;
-    }
-    .nav-menu ul {
-      list-style: none;
-      padding: 0;
+    header h1 {
       margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.2;
     }
-    .nav-menu li {
-      padding: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    .thumbnail-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 0;
+      margin: 2rem 0 0 0;
+      list-style: none;
     }
-    .menu-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.2);
-      z-index: 1000;
+    .thumbnail-list li {
+      padding: 0; /* li要素のpaddingを0に */
     }
-    .menu-overlay.open {
+    .thumbnail-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;               /* フレックスボックスに変更 */
+      flex-direction: column;      /* 縦並び */
+      align-items: stretch;        /* 幅いっぱい */
+      justify-content: center;     /* 垂直方向中央寄せ */
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      /* 枠線を外側に表示 */
+      box-shadow: 0 0 0 2px transparent;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      padding: 0.5rem 0.5rem 1rem 0.5rem; /* aタグにpaddingを追加 */
+      box-sizing: border-box;
+      min-height: 370px; /* サムネイル高さ＋テキスト余裕のため調整。必要に応じて変更 */
+    }
+    .thumbnail-link:hover,
+    .thumbnail-link:focus {
+      box-shadow: 0 0 0 3px #1976d2;
+      outline: none;
+    }
+    .thumbnail-item {
+      background: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      width: 220px;
+      /* li要素やaがpaddingを持つのでここではpaddingを持たせない */
       display: block;
+      cursor: pointer;
+      position: relative;
+      border: none;
+    }
+    .thumb-label {
+      display: inline-block;
+      background: #ff9800;
+      color: #fff;
+      font-size: 0.8em;
+      font-weight: bold;
+      border-radius: 1em;
+      padding: 0.3em 1em;
+      margin-bottom: 0.4em;
+      letter-spacing: 0.04em;
+      text-align: left;
+      align-self: flex-start;
+    }
+    .thumb-img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 0.25rem;
+      background: #eaeaea;
+      margin-bottom: 0.7rem;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    .thumb-title {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      text-align: center;
+      color: #1976d2;
+    }
+    .thumb-desc {
+      font-size: 0.95em;
+      color: #555;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+      line-height: 1.5;
+      max-width: 100%;
+      min-height: 4.4em;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .thumb-price {
+      font-size: 1em;
+      color: #388e3c;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      text-align: center;
     }
     footer {
       background: #eee;
@@ -92,51 +144,78 @@
       }
       header {
         font-size: 1.1em;
+        min-height: 36px;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
       }
-      .nav-menu {
-        width: 70vw;
-        min-width: 140px;
-        max-width: 270px;
+      .thumbnail-list {
+        gap: 0.7rem;
+      }
+      .thumbnail-item {
+        width: 100%;
+        max-width: 320px;
+      }
+      .thumb-img {
+        width: 100%;
+        height: 160px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="menu-overlay" id="menuOverlay"></div>
-  <nav class="nav-menu" id="navMenu">
-    <ul>
-      <li>ホーム</li>
-      <li>サービス</li>
-      <li>会社情報</li>
-      <li>お問い合わせ</li>
-    </ul>
-  </nav>
   <header>
-    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
     <h1>レスポンシブ雛型</h1>
   </header>
   <main>
-    <p>これは最小限のレスポンシブ対応HTML雛型です。画面サイズに応じてレイアウトが変化します。</p>
+    <ul class="thumbnail-list">
+      <li class="thumbnail-item">
+        <a href="#" class="thumbnail-link" tabindex="0">
+          <span class="thumb-label">新商品</span>
+          <img class="thumb-img" src="https://placehold.jp/160x160.png?text=商品A" alt="商品Aのサムネイル">
+          <div class="thumb-title">商品A</div>
+          <div class="thumb-desc">
+            驚きの使いやすさとシンプルなデザインを両立した新商品。どんなシーンにも馴染み、日々の生活をより快適にするアイテムです。初心者にもおすすめ！
+          </div>
+          <div class="thumb-price">¥2,980</div>
+        </a>
+      </li>
+      <li class="thumbnail-item">
+        <a href="#" class="thumbnail-link" tabindex="0">
+          <span class="thumb-label">おすすめ</span>
+          <img class="thumb-img" src="https://placehold.jp/160x160.png?text=商品B" alt="商品Bのサムネイル">
+          <div class="thumb-title">商品B</div>
+          <div class="thumb-desc">
+            高品質な素材を使用し、耐久性に優れたおすすめ商品。手軽に使えてコストパフォーマンスも抜群。毎日の暮らしに役立つこと間違いなし！
+          </div>
+          <div class="thumb-price">¥1,980</div>
+        </a>
+      </li>
+      <li class="thumbnail-item">
+        <a href="#" class="thumbnail-link" tabindex="0">
+          <span class="thumb-label">限定</span>
+          <img class="thumb-img" src="https://placehold.jp/160x160.png?text=商品C" alt="商品Cのサムネイル">
+          <div class="thumb-title">商品C</div>
+          <div class="thumb-desc">
+            ここでしか手に入らない数量限定アイテム。特別なデザインと機能で自分だけの個性を演出。ギフトにも最適な一品です。お早めにどうぞ！
+          </div>
+          <div class="thumb-price">¥3,500</div>
+        </a>
+      </li>
+      <li class="thumbnail-item">
+        <a href="#" class="thumbnail-link" tabindex="0">
+          <span class="thumb-label">人気</span>
+          <img class="thumb-img" src="https://placehold.jp/160x160.png?text=商品D" alt="商品Dのサムネイル">
+          <div class="thumb-title">商品D</div>
+          <div class="thumb-desc">
+            多くのお客様に支持されているロングセラー商品。手軽に使えて便利、コスパも良好。毎日の生活に取り入れてみませんか？幅広い世代に人気！
+          </div>
+          <div class="thumb-price">¥780</div>
+        </a>
+      </li>
+    </ul>
   </main>
   <footer>
     &copy; 2025 Responsive Template
   </footer>
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const navMenu = document.getElementById('navMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-    menuBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      menuOverlay.classList.toggle('open');
-    });
-    menuOverlay.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      menuOverlay.classList.remove('open');
-    });
-  </script>
 </body>
 </html>
